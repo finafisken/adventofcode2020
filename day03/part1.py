@@ -3,17 +3,14 @@ def check_path(step_x, step_y):
     x = 0
     count = 0
     for y, line in enumerate(file.readlines()):
+      # skip lines according to step_y
       if y == 0 or y % step_y != 0:
         continue
 
-      line = line.strip()
-      max_x = len(line)
-      n_x = x + step_x
-
-      x = n_x if n_x < max_x else n_x - max_x
-
-      if line[x] == '#':
-        count += 1
+      # looping index, strip \n char from line
+      x = (x + step_x) % len(line.strip())
+      # cast bool as int before increment
+      count += int(line[x] == '#')
 
     return count
 
