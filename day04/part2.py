@@ -67,6 +67,6 @@ def validate(passport):
 
 
 with open('input.txt', 'r') as file:
-  passports = map(lambda l: l.replace('\n', ' '), file.read().split('\n\n'))
-  valid_passport_count =[validate(p) for p in passports].count(True)
+  passports = [l.replace('\n', ' ') for l in file.read().split('\n\n')]
+  valid_passport_count = [validate(p) for p in passports].count(True)
   print(valid_passport_count)
