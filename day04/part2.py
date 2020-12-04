@@ -48,16 +48,15 @@ def validate(passport):
     'pid:': lambda n: validate_number(n, 0, math.inf, 9),
   }
 
-  split_passport = passport.split(' ')
-
   for key in validators.keys():
     if key not in passport:
       return False
 
-  for part in split_passport:
-    key = part[:4]
-    if key not in validators.keys(): continue
-    value = part [4:]
+  for kv_pair in passport.split(' '):
+    key = kv_pair[:4]
+    if key not in validators.keys():
+      continue
+    value = kv_pair[4:]
     valid = validators[key](value)
 
     if not valid:
@@ -69,5 +68,5 @@ def validate(passport):
 
 with open('input.txt', 'r') as file:
   passports = map(lambda l: l.replace('\n', ' '), file.read().split('\n\n'))
-  valid_passports = list(filter(lambda p: validate(p), passports))
-  print(len(valid_passports))
+  valid_passport_count =[validate(p) for p in passports].count(True)
+  print(valid_passport_count)
