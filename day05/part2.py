@@ -10,7 +10,6 @@ def half(d, min, max):
 
 def get_row(instr):
   row_instruction = instr[:7]
-
   max_row = 127
   min_row = 0
 
@@ -32,7 +31,7 @@ def get_col(instr):
 with open('input.txt', 'r') as file:
   seat_instructions = [l for l in file.read().split('\n')]
   seat_ids = [get_row(s) * 8 + get_col(s) for s in seat_instructions]
-  possible_seat_ids = [r * 8 + c for r in range(0, 127) for c in range(0, 8) if r * 8 + c not in seat_ids]
+  possible_seat_ids = [r * 8 + c for r in range(0, 127) for c in range(0, 7) if r * 8 + c not in seat_ids]
 
   for id in possible_seat_ids:
     if id+1 in seat_ids and id-1 in seat_ids:
