@@ -10,8 +10,7 @@ def validate_number(num, min = 0, max = math.inf, length = None):
     return False
 
 def validate_ecl(ecl):
-  valid_colors = ['amb', 'blu', 'brn', 'gry', 'grn', 'hzl', 'oth']
-  return ecl in valid_colors
+  return ecl in ['amb', 'blu', 'brn', 'gry', 'grn', 'hzl', 'oth']
 
 def validate_hcl(hcl):
   hex = hcl.replace('#', '0x')
