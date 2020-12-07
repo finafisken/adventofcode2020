@@ -12,16 +12,16 @@ def bag_collection(bags):
     collection[color] = amount
   return collection
 
-def search(color, searched):
-  if 'shiny gold' in bag_color_rules[color]:
-    return True
-  else:
+def count_bags(color):
+  count = 0
+  if len(bag_color_rules[color]):
     for bag in bag_color_rules[color]:
-      if bag and bag not in searched:
-        searched.append(bag)
-        if search(bag, searched):
-          return True
-    return False
+      if not bag:
+        continue
+      count += bag_color_rules[color][bag] + (bag_color_rules[color][bag] * count_bags(bag))
+    return count
+  else:
+    return 0
 
 with open('input.txt', 'r') as file:
   rules = [r.replace('.', '').split(' bags contain ') for r in file.read().split('\n')]
@@ -29,10 +29,4 @@ with open('input.txt', 'r') as file:
   for r in rules:
     bag_color_rules[r[0]] = bag_collection(r[1].split(', '))
 
-  count = 0
-  for color in bag_color_rules:
-    searched = []
-    if search(color, searched):
-      count += 1
-
-  print(count)
+  print(count_bags('shiny gold'))
