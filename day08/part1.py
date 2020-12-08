@@ -18,9 +18,11 @@ def execute(instruction, state):
 with open('input.txt', 'r') as file:
   instructions = [r for r in file.read().split('\n')]
 
-  # (index, acc, history)
-  state = (0, 0, [])
-  while (state[0] not in state[2]):
-    state = execute(instructions[state[0]], state)
+  index = 0
+  accumulator = 0
+  history = []
+
+  while (index not in history and index < len(instructions)):
+    index, accumulator, history = execute(instructions[index], (index, accumulator, history))
   
-  print(state[1])
+  print(accumulator)

@@ -15,11 +15,12 @@ def execute(instruction, state):
   return (index, accumulator, history)
 
 def run_sequence(instructions):
-  # (index, acc, history)
-  state = (0, 0, [])
-  while (state[0] not in state[2] and state[0] < len(instructions)):
-    state = execute(instructions[state[0]], state)
-  return state
+  index = 0
+  accumulator = 0
+  history = []
+  while (index not in history and index < len(instructions)):
+    index, accumulator, history = execute(instructions[index], (index, accumulator, history))
+  return (index, accumulator, history)
 
 with open('input.txt', 'r') as file:
   instructions = [r for r in file.read().split('\n')]
@@ -29,7 +30,7 @@ with open('input.txt', 'r') as file:
   for j in jump_instr_index:
     modified_instructions = instructions.copy()
     modified_instructions[j] = modified_instructions[j].replace('jmp', 'nop')
-    state = run_sequence(modified_instructions)
-    if (state[0] == len(instructions)):
-      print(state[1])
+    index, accumulator, _ = run_sequence(modified_instructions)
+    if (index == len(instructions)):
+      print(accumulator)
       break
