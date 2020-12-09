@@ -7,7 +7,11 @@ with open('input.txt', 'r') as file:
   for start_i in range(0, len(numbers)):
     for end_i in range(start_i, len(numbers)):
       sequence = numbers[start_i:end_i]
-      if sum(sequence) == target:
+      total = sum(sequence)
+
+      if total > target:
+        break
+      if total == target:
         print(min(sequence) + max(sequence))
         found = True
         break
