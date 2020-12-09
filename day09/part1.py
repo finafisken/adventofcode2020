@@ -5,7 +5,7 @@ with open('input.txt', 'r') as file:
   preamble = 25
 
   for i in range(preamble, len(numbers)):
-    preamble_combos = list(combinations(numbers[i-preamble:i], 2))
+    preamble_combos = combinations(numbers[i-preamble:i], 2)
     preamble_combos_sum = [a + b for (a, b) in preamble_combos]
 
     if i < len(numbers) and numbers[i] not in preamble_combos_sum:
