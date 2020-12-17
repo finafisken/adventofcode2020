@@ -4,12 +4,7 @@ from itertools import product
 def get_neighbor_coords(pos):
   x,y,z = pos
   deltas = product([-1, 0, 1], repeat=3)
-  neighbors = []
-  for delta in deltas:
-    if delta == (0,0,0):
-      continue
-    dx, dy, dz = delta
-    neighbors.append((x+dx, y+dy, z+dz))
+  neighbors = [(x+dx, y+dy, z+dz) for dx, dy, dz in deltas if (dx,dy,dz) != (0,0,0)]
 
   return neighbors
 
