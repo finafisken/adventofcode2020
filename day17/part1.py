@@ -1,35 +1,15 @@
 from collections import defaultdict
+from itertools import product
 
 def get_neighbor_coords(pos):
   x,y,z = pos
-  neighbors = [
-    (x-1, y, z),
-    (x-1, y-1, z),
-    (x-1, y+1, z),
-    (x+1, y, z),
-    (x+1, y-1, z),
-    (x+1, y+1, z),
-    (x, y-1, z),
-    (x, y+1, z),
-    (x-1, y, z+1),
-    (x-1, y-1, z+1),
-    (x-1, y+1, z+1),
-    (x+1, y, z+1),
-    (x+1, y-1, z+1),
-    (x+1, y+1, z+1),
-    (x, y-1, z+1),
-    (x, y+1, z+1),
-    (x-1, y, z-1),
-    (x-1, y-1, z-1),
-    (x-1, y+1, z-1),
-    (x+1, y, z-1),
-    (x+1, y-1, z-1),
-    (x+1, y+1, z-1),
-    (x, y-1, z-1),
-    (x, y+1, z-1),
-    (x, y, z+1),
-    (x, y, z-1),
-  ]
+  deltas = product([-1, 0, 1], repeat=3)
+  neighbors = []
+  for delta in deltas:
+    if delta == (0,0,0):
+      continue
+    dx, dy, dz = delta
+    neighbors.append((x+dx, y+dy, z+dz))
 
   return neighbors
 
